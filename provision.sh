@@ -3,8 +3,9 @@
 
 # SOURCES
 
-[ -f "./conf.sh" ] && source "./conf.sh"
+source "./conf.sh"
 source "src/logger.sh"
+source "src/modules.sh"
 
 
 # HELPERS
@@ -29,17 +30,16 @@ run_each_modules_provisioner () {
 # INTERFACE
 
 provision () {
+  download_modules "$@"
   run_each_modules_provisioner
 }
-
-
 
 
 # MAIN
 
 main () {
   log_header
-  provision
+  provision "$@"
   log_footer
 }
 
