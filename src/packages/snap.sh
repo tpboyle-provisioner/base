@@ -21,3 +21,9 @@ snap_ensure_package_is_installed () {
   fi
 }
 
+snap_ensure_packages_are_installed () {
+  packages=("$@")
+  for package in "${packages[@]}"; do
+    snap_ensure_package_is_installed "$package"
+  done
+}

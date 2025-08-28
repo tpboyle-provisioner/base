@@ -53,7 +53,7 @@ download_module_from_line () {
   name="$(module_name "$line")"
   echo "Downloading module $name ($git_path)..."
   if module_exists "$name"; then
-    update_module
+    update_module "$name"
   else
     clone_module "$name" "$git_path"
   fi
