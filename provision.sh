@@ -23,8 +23,12 @@ log_footer () {
 
 run_each_modules_provisioner () {
   for dir in ./modules/*; do
-    if [ -d "$dir" ]; then
+    if [ -f "$dir/provision.sh" ]; then
+      info "main" "Running provisioner for module: $(basename "$dir")"
       "$dir/provision.sh"
+    else
+      warn "main" "No provisioner found for module: $(basename "$dir")"
+      continue
     fi
   done
 }
@@ -33,7 +37,7 @@ run_each_modules_provisioner () {
 # INTERFACE
 
 provision () {
-  download_modules "$@"
+  update_modules "$@"
   run_each_modules_provisioner
 }
 
