@@ -1,14 +1,21 @@
 #!/bin/bash
 
 # ROOT DIR
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+
+# CONFIG
+
+SRC_DIR="$ROOT_DIR/src"
+SRC_URL="https://github.com/tpboyle-provisioner/src.git"
 
 
 # SOURCES
 
 source "./conf.sh"
-source "src/logger.sh"
-source "src/modules.sh"
+source "$SRC_DIR/logger.sh"
+source "$SRC_DIR/modules.sh"
 
 
 # HELPERS
@@ -19,6 +26,16 @@ log_header () {
 
 log_footer () {
   info "main" "---- ...provisioning complete. ----"
+}
+
+update_src () {
+  if [[ -d "$SRC_DIR" ]]; then
+    cd "$SRC_DIR"
+    git pull &> /dev/null
+    cd - &> /dev/null
+  else
+    git clone "$SRC_URL" "$SRC_DIR"
+  fi
 }
 
 run_each_modules_provisioner () {
@@ -45,6 +62,11 @@ provision () {
 # MAIN
 
 main () {
+  update_src
+  if [[ ! -d "$SRC_DIR" || ! -f "$SRC_DIR/modules.sh" ]]; then
+    echo "Could not find the src/ directory!"
+    return 1
+  fi
   log_header
   provision "$@"
   log_footer
