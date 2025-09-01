@@ -58,8 +58,7 @@ update_src () {
 
 run_each_modules_provisioner () {
   for dir in ./modules/*; do
-    if [[ ("$dir" == *"home" || "$dir" == *"development") && -f "$dir/provision.sh" ]]; then
-      info "main" "Running provisioner for module: $(basename "$dir")"
+    if [[ -f "$dir/provision.sh" ]]; then
       "$dir/provision.sh"
     else
       warn "main" "No provisioner found for module: $(basename "$dir")"

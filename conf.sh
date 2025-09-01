@@ -1,4 +1,6 @@
 #!/bin/bash
 
 MODULE_DEVELOPMENT="git@github.com:tpboyle-provisioner/development.git"
+MODULE_DOCKER="git@github.com:tpboyle-provisioner/docker.git"
 MODULE_HOME="git@github.com:tpboyle-provisioner/home.git"
+MODULE_KVM="git@github.com:tpboyle-provisioner/kvm.git"
