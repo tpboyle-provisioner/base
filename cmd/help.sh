@@ -23,8 +23,9 @@ EOF
 }
 
 help_and_exit () {
-  msg="$1"
-  echo "$msg"
+  local status="${1:0}"
+  local msg="$2"
+  [[ -n "$msg" ]] && echo "$msg"
   help
-  exit 1
+  exit "$status"
 }

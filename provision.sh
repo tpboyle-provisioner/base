@@ -30,11 +30,12 @@ source_src_modules () {
   fi
 }
 
+
 # MAIN
 
 main () {
-  [[ $# -eq 0 ]] && help && exit 0
-  command="$1"
+  (( $# == 0 )) && help && exit 0
+  local command="$1"
   case "$command" in
     help|--help)
       help && exit 0 ;;

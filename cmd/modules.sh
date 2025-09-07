@@ -4,10 +4,10 @@
 # INTERFACE
 
 cmd_modules () {
-  command="$1"
+  local command="$1"
   case "$command" in
     help|--help)
-      help && exit 0 ;;
+      help_and_exit 0 ;;
     add)
       shift && cmd_add_modules "$@" && exit 0 ;;
     ls)
@@ -19,7 +19,7 @@ cmd_modules () {
     update)
       shift && cmd_update_modules "$@" && exit 0 ;;
     *)
-      echo "ERROR: Unknown command: $command" && help && exit 1 ;;
+      help_and_exit 1 "ERROR: Unknown command: $command" ;;
     esac
 }
 
@@ -28,30 +28,24 @@ cmd_modules () {
 
 cmd_add_modules () {
   source_src_modules
-  if [[ $# -eq 0 ]]; then
-    echo "ERROR: No modules specified to add."
-    help
-    exit 1
+  if (( $# == 0 )); then
+    help_and_exit 1 "ERROR: No modules specified to add."
   fi
   add_modules "$@"
 }
 
 cmd_rm_modules () {
   source_src_modules
-  if [[ $# -eq 0 ]]; then
-    echo "ERROR: No modules specified to remove."
-    help
-    exit 1
+  if (( $# == 0 )); then
+    help_and_exit 1 "ERROR: No modules specified to remove."
   fi
   rm_modules "$@"
 }
 
 cmd_update_modules () {
   source_src_modules
-  if [[ $# -eq 0 ]]; then
-    echo "ERROR: No modules specified to update."
-    help
-    exit 1
+  if (( $# == 0 )); then
+    help_and_exit 1 "ERROR: No modules specified to update."
   fi
   update_modules "$@"
 }
@@ -63,10 +57,8 @@ cmd_run_modules () {
 }
 
 cmd_ls_modules () {
-  if [[ $# -gt 0 ]]; then
-    echo "ERROR: Unknown options for 'ls': $@"
-    help
-    exit 1
+  if (( $# > 0 )); then
+    help_and_exit 1 "ERROR: Unknown options for 'ls': $@"
   fi
   if [[ -d "./modules" ]]; then
     echo "$(ls modules)"

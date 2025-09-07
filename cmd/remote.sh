@@ -4,18 +4,15 @@
 # INTERFACE
 
 cmd_remote () {
-  if [[ $# -eq 0 ]]; then
-    help_and_exit "No subcommand provided for command 'remote': $@"
+  if (( $# == 0 )); then
+    help_and_exit 1 "No subcommand provided for command 'remote': $@"
   fi
-  subcommand="$1"
+  local subcommand="$1"
   case "$subcommand" in
     ls)
-      cmd_remote_ls
-      exit 0
-      ;;
+      cmd_remote_ls && exit 0 ;;
     *)
-      help_and_exit "Unknown subcommand for 'remote': $subcommand"
-      ;;
+      help_and_exit 1 "Unknown subcommand for 'remote': $subcommand" ;;
   esac
 }
 

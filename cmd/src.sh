@@ -4,22 +4,17 @@
 # INTERFACE
 
 cmd_src () {
-  if [[ $# -eq 0 ]]; then
-    help_and_exit "ERROR: No subcommand provided for command 'src': $@"
+  if (( $# == 0 )); then
+    help_and_exit 1 "ERROR: No subcommand provided for command 'src': $@"
   fi
-  subcommand="$1"
+  local subcommand="$1"
   case "$subcommand" in
     update)
-      cmd_src_update
-      exit 0
-      ;;
+      cmd_src_update && exit 0 ;;
     version)
-      cmd_src_version
-      exit 0
-      ;;
+      cmd_src_version && exit 0 ;;
     *)
-      help_and_exit "Unknown subcommand for 'src': $subcommand"
-      ;;
+      help_and_exit 1 "Unknown subcommand for 'src': $subcommand" ;;
   esac
 }
 
@@ -44,7 +39,7 @@ cmd_src_version () {
     git log -1
     cd - &> /dev/null
   else
-    echo "src/ directory does not exist."
-    return 1
+    echo "ERROR: src/ directory does not exist."
+    exit 1
   fi
 }
