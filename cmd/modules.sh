@@ -28,25 +28,22 @@ cmd_modules () {
 
 cmd_add_modules () {
   source_src_modules
-  if (( $# == 0 )); then
+  (( $# == 0 )) && \
     help_and_exit 1 "ERROR: No modules specified to add."
-  fi
   add_modules "$@"
 }
 
 cmd_rm_modules () {
   source_src_modules
-  if (( $# == 0 )); then
+  (( $# == 0 )) && \
     help_and_exit 1 "ERROR: No modules specified to remove."
-  fi
   rm_modules "$@"
 }
 
 cmd_update_modules () {
   source_src_modules
-  if (( $# == 0 )); then
+  (( $# == 0 )) && \
     help_and_exit 1 "ERROR: No modules specified to update."
-  fi
   update_modules "$@"
 }
 
@@ -57,9 +54,8 @@ cmd_run_modules () {
 }
 
 cmd_ls_modules () {
-  if (( $# > 0 )); then
+  (( $# > 0 )) && \
     help_and_exit 1 "ERROR: Unknown options for 'ls': $@"
-  fi
   if [[ -d "./modules" ]]; then
     echo "$(ls modules)"
   else

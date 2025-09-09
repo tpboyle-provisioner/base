@@ -1,3 +1,7 @@
+#!/bin/bash
+
+
+# INTERFACE
 
 help () {
   cat << EOF
