@@ -42,15 +42,12 @@ cmd_rm_modules () {
 
 cmd_update_modules () {
   source_src_modules
-  (( $# == 0 )) && \
-    help_and_exit 1 "ERROR: No modules specified to update."
   update_modules "$@"
 }
 
 cmd_run_modules () {
-  log_header
+  source_src_modules
   run_modules "$@"
-  log_footer
 }
 
 cmd_ls_modules () {
