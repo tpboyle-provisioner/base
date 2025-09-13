@@ -39,7 +39,7 @@ main () {
   case "$command" in
     help|--help)
       help && exit 0 ;;
-    add|ls|run|rm|update)
+    add|ls|run|rm|update|conf)
       cmd_modules "$@" && exit 0 ;;
     src)
       shift && cmd_src "$@" && exit 0 ;;

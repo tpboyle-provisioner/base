@@ -18,6 +18,8 @@ cmd_modules () {
       shift && cmd_run_modules "$@" && exit 0 ;;
     update)
       shift && cmd_update_modules "$@" && exit 0 ;;
+    conf)
+      shift && cmd_conf_modules "$@" && exit 0 ;;
     *)
       help_and_exit 1 "ERROR: Unknown command: $command" ;;
     esac
@@ -58,4 +60,11 @@ cmd_ls_modules () {
   else
     echo ""
   fi
+}
+
+cmd_conf_modules () {
+  source_src_modules
+  (( $# == 0 )) && \
+    help_and_exit 1 "ERROR: No modules specified to configure."
+  conf_modules "$@"
 }

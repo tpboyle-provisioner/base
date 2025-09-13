@@ -12,6 +12,7 @@ USAGE:
 COMMANDS:
     help|--help               Show this message
     add <MODULES>             Add one or more modules
+    conf <MODULES>            Configure one or more modules (if a conf.sh is present)
     rm <MODULES>              Remove one or more modules
     update [MODULES]          Update one or more modules
                                 (omit to update all modules)
