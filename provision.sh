@@ -50,7 +50,12 @@ main () {
     esac
 }
 
+bootstrap () {
+  [[ ! -d ./src ]] && git clone "$SRC_URL" ./src &> /dev/null
+}
+
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  bootstrap
   main "$@"
 fi
 
