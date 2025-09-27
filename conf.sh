@@ -9,6 +9,7 @@ MODULE_KVM="git@github.com:tpboyle-provisioner/kvm.git"
 
 MODULE_HOME="git@github.com:tpboyle-provisioner/home.git"
 MODULE_ANDROID="git@github.com:tpboyle-provisioner/android.git"
+MODULE_STUDIO="git@github.com:tpboyle-provisioner/studio.git"
 
 
 # CONFIG
